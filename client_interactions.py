@@ -39,10 +39,10 @@ def is_command_allowed(message, trigger):
       allowed_roles = message.guild.roles[min_role_level:]
     except:
       return True
-
     for role in message.author.roles:
-      if role.id == globals_file.permissions[trigger]:
-        return True
+      for allowed_role in allowed_roles:
+        if(allowed_role == role):
+          return True
     return False
   else:
     True
