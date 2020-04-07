@@ -5,7 +5,7 @@ import time
 # local imports
 import config
 import globals_file
-from commands import version, status, ping
+from commands import version, status, ping, join_message_test
 
 # Last time bot's code was updated
 # Printed out by !version
@@ -19,13 +19,7 @@ async def on_member_join(member):
   if(member.dm_channel == None):
     await member.create_dm()
   dm_channel = member.dm_channel
-  welcome_string = """
-  Welcome to the Digital Terrain Minecraft server Discord! We're happy to have you here!
-  Be sure to checkout the information doc that's pinned in both the #landing and #information channel.
-  We'll be sure to give you roles and whitelist you as soon as we notice you've joined the Discord. You can mention the gigabytes
-  or megabytes role in the #default to get our attention. If you make your Discord nickname match your IGN it'll make things go faster for you.
-  Direct any questions you might have to a Gigabyte or Megabyte and we'll make sure to help you as much as possible.
-  """
+  welcome_string = globals_file.welcome_message
   await dm_channel.send(welcome_string)
 
 @client.event
@@ -90,6 +84,9 @@ async def on_message(message):
 
     elif(ping.is_triggered(command_body)):
       await ping.command(message)
+
+    elif(join_message_test.is_triggered(command_body)):
+      await join_message_test.command(message)
 
 
 client.run(config.bot_token)
