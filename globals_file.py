@@ -76,6 +76,6 @@ What do you do in your free time or for work (just want to know a little about y
   We'll be sure to give you roles and whitelist you as soon as we notice you've joined the Discord. You can mention the gigabytes
   or megabytes role in the #default to get our attention. If you make your Discord nickname match your IGN it'll make things go faster for you.
   Direct any questions you might have to a Gigabyte or Megabyte and we'll make sure to help you as much as possible.
-  Note: If you're coming from Planet Minecraft be sure to post your app in the #default channel using the template below.
+  Note: If you've joined the Discord without sending an app first be sure to post your app in the #default channel using the template below.
   %s
   """ % app_template
