@@ -30,7 +30,6 @@ async def on_member_ban(guild, user):
 
 @client.event
 async def on_guild_channel_update(before, after):
-  print(globals_file.tps_booster)
   await guild_channel_updated.handle(before, after)
 
 @client.event
