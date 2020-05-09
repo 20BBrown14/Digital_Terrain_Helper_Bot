@@ -20,6 +20,5 @@ async def handle(before, after):
         globals_file.tps_booster['waiting_on_player_list'] = {"is_waiting": True, "time_started": datetime.datetime.now()}
         time.sleep(1)
         await globals_file.console_logs_channel.send('list')
-        print(globals_file.tps_booster)
 
 

@@ -35,8 +35,8 @@ async def apply(message):
       if(globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting']):
         globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting'] = False
         globals_file.tps_booster['waiting_on_player_status']['players'][player]['is_afk'] = True
-        await globals_file.moderation['moderation_channel'].send("Kicking %s due to being AFK at during low TPS" % player)
-        await globals_file.console_logs_channel.send("kick %s %s" % (player, globals_file.tps_booster['kick_reason']))
+        await globals_file.moderation['moderation_channel'].send("Kicking %s due to being AFK during low TPS" % player)
+        await globals_file.console_logs_channel.send(u"kick %s %s" % (player.replace('\\', ''), globals_file.tps_booster['kick_reason']))
 
   for player in globals_file.tps_booster['waiting_on_player_status']['players']:
     if globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting']:

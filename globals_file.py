@@ -93,5 +93,6 @@ What do you do in your free time or for work (just want to know a little about y
     if(config.tps_booster):
       tps_booster = config.tps_booster
       tps_booster['waiting_on_player_list'] = None
+      tps_booster['waiting_on_player_status'] = None
     else:
       tps_booster = None

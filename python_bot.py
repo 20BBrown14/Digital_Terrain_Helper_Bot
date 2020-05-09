@@ -45,6 +45,12 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
+    await set_playerlist.apply(message)
+
+  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_status'] and globals_file.tps_booster['waiting_on_player_status']['is_waiting']):
+    await handle_afk_status.apply(message)
+
   # Ignore everything in the logs channel
   if(globals_file.logs):
     if(message.channel.id == globals_file.logs['logs_channel'].id or message.channel.id in globals_file.logs['ignored_channels']):
@@ -56,11 +62,7 @@ async def on_message(message):
       log_message = ('%s said \"%s\" in %s#%s at %s') % (author, message.clean_content, message.guild.name, message.channel.name, message.created_at.strftime("%m/%d/%Y, %H:%M:%S"))
       await globals_file.logs['logs_channel'].send(log_message)
 
-  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
-    await set_playerlist.apply(message)
-
-  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_status'] and globals_file.tps_booster['waiting_on_player_status']['is_waiting']):
-    await handle_afk_status.apply(message)
+  
 
   # Ignore commands outside of commands channel or in ignored channels if set
   if(globals_file.commands_config):

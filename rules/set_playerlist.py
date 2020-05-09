@@ -41,5 +41,5 @@ async def apply(message):
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting'] = True
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['start_time'] = datetime.datetime.now()
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['is_afk'] = False
-      time.sleep(1)
-      await globals_file.console_logs_channel.send('afkplus player %s' % player)
+      time.sleep(5)
+      await globals_file.console_logs_channel.send(u'afkplus player %s' % player.replace('\\', ''))
