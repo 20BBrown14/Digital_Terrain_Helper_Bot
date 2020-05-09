@@ -6,6 +6,8 @@ import time
 import config
 import globals_file
 from commands import version, status, ping, join_message_test
+from events import member_joined, member_left, member_banned, guild_channel_updated
+from rules import set_playerlist, handle_afk_status
 
 # Last time bot's code was updated
 # Printed out by !version
@@ -16,31 +18,20 @@ client = Client()
 
 @client.event
 async def on_member_join(member):
-  if(member.dm_channel == None):
-    await member.create_dm()
-  dm_channel = member.dm_channel
-  welcome_string = globals_file.welcome_message
-  await dm_channel.send(welcome_string)
+  await member_joined.handle(member)
 
 @client.event
 async def on_member_remove(member):
-  if(member.nick):
-    await globals_file.moderation['moderation_channel'].send('Removing "%s" from whitelist. You should double check that it was actually completed.' % member.nick)
-    await globals_file.console_logs_channel.send('whitelist remove %s' % member.nick)
-  await globals_file.moderation['moderation_channel'].send('Removing "%s" from whitelist. You should double check that it was actually completed.' % member.name)
-  await globals_file.console_logs_channel.send('whitelist remove %s' % member.name)
+  await member_left.handle(member)
 
 @client.event
 async def on_member_ban(guild, user):
-  if(isinstance(user, User)):
-    await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.name)
-    await globals_file.console_logs_channel.send("ban %s Banned from Discord server" % user.name)
-  elif(isinstance(user, Member)):
-    if(user.nick):
-      await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.nick)
-      await globals_file.console_logs_channel.send("ban %s Banned from Discord Server" % user.nick)
-    await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.name)
-    await globals_file.console_logs_channel.send("ban %s Banned from Discord Server" % user.name)
+  await member_banned.handle(guild, user)
+
+@client.event
+async def on_guild_channel_update(before, after):
+  print(globals_file.tps_booster)
+  await guild_channel_updated.handle(before, after)
 
 @client.event
 async def on_ready():
@@ -64,6 +55,12 @@ async def on_message(message):
       author = message.author.nick if message.author.nick else message.author.name
       log_message = ('%s said \"%s\" in %s#%s at %s') % (author, message.clean_content, message.guild.name, message.channel.name, message.created_at.strftime("%m/%d/%Y, %H:%M:%S"))
       await globals_file.logs['logs_channel'].send(log_message)
+
+  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
+    await set_playerlist.apply(message)
+
+  if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_status'] and globals_file.tps_booster['waiting_on_player_status']['is_waiting']):
+    await handle_afk_status.apply(message)
 
   # Ignore commands outside of commands channel or in ignored channels if set
   if(globals_file.commands_config):

@@ -14,10 +14,13 @@ global app_template
 
 global welcome_message
 
+global tps_booster
+
 def init(client, config):
 
   # Setup logs
   global logs
+  logs = None
   if(config.logs and config.logs['log_all_messages']):
     for guild in client.guilds:
       for channel in guild.channels:
@@ -29,6 +32,7 @@ def init(client, config):
 
   # Setup mooderation
   global moderation
+  moderation = None
   if(config.moderation and config.moderation['moderation_channel']):
     for guild in client.guilds:
       for channel in guild.channels:
@@ -40,6 +44,7 @@ def init(client, config):
 
   # Setup bot commands
   global commands_config
+  commands_config = None
   if(config.bot_commands and config.bot_commands['commands_channel']):
     for guild in client.guilds:
       for channel in guild.channels:
@@ -50,6 +55,7 @@ def init(client, config):
     commands_config = None
 
   global console_logs_channel
+  console_logs_channel = None
   if(config.console_channel):
     for guild in client.guilds:
       for channel in guild.channels:
@@ -57,6 +63,7 @@ def init(client, config):
           console_logs_channel = channel
 
   global permissions
+  permissions = None
   permissions = config.permissions if config.permissions else None
 
   global app_template
@@ -79,3 +86,12 @@ What do you do in your free time or for work (just want to know a little about y
   Note: If you've joined the Discord without sending an app first be sure to post your app in the #default channel using the template below.
   %s
   """ % app_template
+
+  global tps_booster
+  tps_booster = None
+  if(config.tps_booster):
+    if(config.tps_booster):
+      tps_booster = config.tps_booster
+      tps_booster['waiting_on_player_list'] = None
+    else:
+      tps_booster = None
