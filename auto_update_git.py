@@ -10,6 +10,7 @@ def kill_bot():
   global python_bot_pid
   if(python_bot_pid > 0):
     subProcess = subprocess.call(["kill", "-9", str(python_bot_pid)], cwd=os.getcwd())
+    time.sleep(5)
 
 
 def start_bot():
@@ -36,8 +37,15 @@ def main():
   global python_bot_pid
   python_bot_pid = -1
   start_bot()
+  start_time = datetime.datetime.now()
   while(1):
     check_for_git_update()
     time.sleep(60*30)
+    now = datetime.datetime.now()
+    time_delta = now - start_time
+    if(time_delta > datetime.timedelta(days=1)):
+      kill_bot()
+      start_bot()
+      start_time = now
 
 main()

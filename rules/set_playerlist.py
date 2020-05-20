@@ -14,15 +14,15 @@ Set playerlist for currently online players
 """
 
 async def apply(message):
+  if(globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
+    if(globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
+      time_delta = datetime.datetime.now() - globals_file.tps_booster['waiting_on_player_list']['time_started']
+      if((time_delta > datetime.timedelta(minutes=5))):
+        globals_file.tps_booster['waiting_on_player_list']['is_waiting'] = False
+        globals_file.tps_booster['waiting_on_player_list']['time_started'] = None
+        return 0
   matches = re.search("(There are \d+ of a max \d+ players online: .+)", message.content)
   if(matches):
-    if(globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
-      if(globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
-        time_delta = datetime.datetime.now() - globals_file.tps_booster['waiting_on_player_list']['time_started']
-        if((time_delta > datetime.timedelta(minutes=5))):
-          globals_file.tps_booster['waiting_on_player_list']['is_waiting'] = False
-          globals_file.tps_booster['waiting_on_player_list']['time_started'] = None
-          return 0
     globals_file.tps_booster['waiting_on_player_list'] = False
     players = matches.groups()[0].split(': ')[1].split(', ')
     globals_file.tps_booster['waiting_on_player_status'] = {}
@@ -35,11 +35,10 @@ async def apply(message):
       globals_file.tps_booster['waiting_on_player_status']['is_waiting'] = False
       globals_file.tps_booster['waiting_on_player_status']['time_started'] = None
       return 0
-    
     for player in players:
       globals_file.tps_booster['waiting_on_player_status']['players'][player] = {}
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting'] = True
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['start_time'] = datetime.datetime.now()
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['is_afk'] = False
-      time.sleep(5)
+      time.sleep(1)
       await globals_file.console_logs_channel.send(u'afkplus player %s' % player.replace('\\', ''))
