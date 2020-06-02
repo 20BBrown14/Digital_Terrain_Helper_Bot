@@ -58,10 +58,12 @@ async def on_ready():
 async def on_message(message):
   if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
     log_message = "Setting playerlist\ntps_booster: %s" % globals_file.tps_booster
+    globals_file.log_information(log_message)
     await set_playerlist.apply(message)
 
   if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_status'] and globals_file.tps_booster['waiting_on_player_status']['is_waiting']):
     log_message = "Handling afk statuses\ntps_booster: %s" % globals_file.tps_booster
+    globals_file.log_information(log_message)
     await handle_afk_status.apply(message)
 
   # Ignore everything in the logs channel
@@ -87,6 +89,7 @@ async def on_message(message):
   # listen to command attempt
   if(message.content.startswith('!')):
     log_message = "Command detected. messageContent:%s, messageAuthor:%s" % (message.content, message.author)
+    globals_file.log_information(log_message)
     command_body = message.content[1:].lower()
 
     if(version.is_triggered(command_body)):
