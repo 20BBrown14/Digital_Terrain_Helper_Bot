@@ -1,6 +1,7 @@
 #guild_channel_updated.py
 import datetime
 import time
+import sys
 
 import globals_file
 
