@@ -37,8 +37,6 @@ async def on_member_ban(guild, user):
 
 @client.event
 async def on_guild_channel_update(before, after):
-  print("Before %s, %d, %s" % (before.name, before.id, before.topic))
-  print("After %s, %d, %s" % (after.name, after.id, after.topic))
   log_message = "Guild Channel Update Event\nBefore: name:%s, id:%d, topic:%s\nAfter: name:%s, id:%d, topic:%s" % (before.name, before.id, before.topic, after.name, after.id, after.topic)
   globals_file.log_information(log_message)
   await guild_channel_updated.handle(before, after)
