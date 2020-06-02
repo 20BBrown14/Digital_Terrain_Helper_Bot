@@ -9,6 +9,8 @@ async def send_message(message, message_to_send, force_author = False):
   except:
     print('Failed to send message')
     print(sys.exc_info()[0])
+    error_message = "Failed to send message. %s" % sys.exc_info()[0]
+    globals_file.log_information(error_message)
 
 async def delete_message(message):
   try:
@@ -20,6 +22,8 @@ async def delete_message(message):
   except:
     print('Failed to delete message')
     print(sys.exc_info()[0])
+    error_message = "Failed to delete message. %s" % sys.exc_info()[0]
+    globals_file.log_information(error_message)
 
 def determine_destination(message, force_author):
   return message.channel if message.channel.name and not force_author else message.author

@@ -1,4 +1,6 @@
 import json
+import logging
+import time
 
 global logs
 
@@ -16,6 +18,13 @@ global welcome_message
 
 global tps_booster
 
+global logger
+logging.basicConfig(filename="DigitalTerrainHelperBotLogs.log", level=logging.INFO)
+logger = logging.getLogger('Digital_Terrain_Helper_Bot')
+
+def log_information(log_message):
+  logger.info("%s - %s" % (time.strftime("%d/%m/%Y %H:%M:%S"), log_message))
+
 def init(client, config):
 
   # Setup logs
@@ -30,6 +39,9 @@ def init(client, config):
   else:
     logs = None
 
+  log_message = "Logs config setup: %s" % logs
+  log_information(log_message)
+
   # Setup mooderation
   global moderation
   moderation = None
@@ -41,6 +53,9 @@ def init(client, config):
           moderation['moderation_channel'] = channel
   else:
     moderation = None
+
+  log_message = "Moderation config setup: %s" % moderation
+  log_information(log_message)
 
   # Setup bot commands
   global commands_config
@@ -54,6 +69,9 @@ def init(client, config):
   else:
     commands_config = None
 
+  log_message = "Commands config setup: %s" % commands_config
+  log_information(log_message)
+
   global console_logs_channel
   console_logs_channel = None
   if(config.console_channel):
@@ -62,9 +80,15 @@ def init(client, config):
         if channel.id == config.console_channel:
           console_logs_channel = channel
 
+  log_message = "Console Logs Config setup: %s" % console_logs_channel
+  log_information(log_message)
+
   global permissions
   permissions = None
   permissions = config.permissions if config.permissions else None
+
+  log_message = "Permissions config setup: %s" % permissions
+  log_information(log_message)
 
   global app_template
   app_template = """
@@ -95,3 +119,6 @@ What do you do in your free time or for work (just want to know a little about y
     tps_booster['waiting_on_player_status'] = None
   else:
     tps_booster = None
+
+  log_message = "TPS booster config setup: %s" % tps_booster
+  log_information(log_message)

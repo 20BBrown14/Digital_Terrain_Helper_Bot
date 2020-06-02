@@ -1,6 +1,7 @@
 # Library imports
 from discord import Client, Game, User, Member
 import time
+import logging
 
 # local imports
 import config
@@ -12,24 +13,34 @@ from rules import set_playerlist, handle_afk_status
 # Last time bot's code was updated
 # Printed out by !version
 # eg. 2019-03-31_1 is the first change on March 31, 2019
-current_version = '2020-03-29_1'
+current_version = '2020-06-02_1'
 
 client = Client()
 
 @client.event
 async def on_member_join(member):
+  log_message = "Member Joined\nMember: name:%s, nick:%s, id:%d" % (member.name, member.nick, member.id)
+  globals_file.log_information(log_message)
   await member_joined.handle(member)
 
 @client.event
 async def on_member_remove(member):
+  log_message = "Member Remove Event\nMember: name:%s, nick:%s. id:%d" % (member.name, member.nick, member.id)
+  globals_file.log_information(log_message)
   await member_left.handle(member)
 
 @client.event
 async def on_member_ban(guild, user):
+  log_message = "Guild Member Ban Event\nGuild: name:%s\nUser: name:%s, id:%d" % (guild.name, user.name, user.id)
+  globals_file.log_information(log_message)
   await member_banned.handle(guild, user)
 
 @client.event
 async def on_guild_channel_update(before, after):
+  print("Before %s, %d, %s" % (before.name, before.id, before.topic))
+  print("After %s, %d, %s" % (after.name, after.id, after.topic))
+  log_message = "Guild Channel Update Event\nBefore: name:%s, id:%d, topic:%s\nAfter: name:%s, id:%d, topic:%s" % (before.name, before.id, before.topic, after.name, after.id, after.topic)
+  globals_file.log_information(log_message)
   await guild_channel_updated.handle(before, after)
 
 @client.event
@@ -41,13 +52,16 @@ async def on_ready():
   client_game = Game(name=config.game_played)
   await client.change_presence(activity = client_game)
   globals_file.init(client, config)
+  globals_file.log_information("Bot Started")
 
 @client.event
 async def on_message(message):
   if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_list'] and globals_file.tps_booster['waiting_on_player_list']['is_waiting']):
+    log_message = "Setting playerlist\ntps_booster: %s" % globals_file.tps_booster
     await set_playerlist.apply(message)
 
   if(not message.author == client.user and globals_file.console_logs_channel and message.channel.id == globals_file.console_logs_channel.id and globals_file.tps_booster and globals_file.tps_booster['waiting_on_player_status'] and globals_file.tps_booster['waiting_on_player_status']['is_waiting']):
+    log_message = "Handling afk statuses\ntps_booster: %s" % globals_file.tps_booster
     await handle_afk_status.apply(message)
 
   # Ignore everything in the logs channel
@@ -72,6 +86,7 @@ async def on_message(message):
 
   # listen to command attempt
   if(message.content.startswith('!')):
+    log_message = "Command detected. messageContent:%s, messageAuthor:%s" % (message.content, message.author)
     command_body = message.content[1:].lower()
 
     if(version.is_triggered(command_body)):

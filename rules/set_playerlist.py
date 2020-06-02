@@ -20,6 +20,8 @@ async def apply(message):
       if((time_delta > datetime.timedelta(minutes=5))):
         globals_file.tps_booster['waiting_on_player_list']['is_waiting'] = False
         globals_file.tps_booster['waiting_on_player_list']['time_started'] = None
+        log_message = "Time expired for getting player list. tps_booster: %s" % globals_file.tps_booster
+        globals_file.log_information(log_message)
         return 0
   matches = re.search("(There are \d+ of a max \d+ players online: .+)", message.content)
   if(matches):
@@ -30,15 +32,21 @@ async def apply(message):
       globals_file.tps_booster['waiting_on_player_status']['players'] = {}
       globals_file.tps_booster['waiting_on_player_status']['is_waiting'] = True
       globals_file.tps_booster['waiting_on_player_status']['time_started'] = datetime.datetime.now()
+      log_message = "Started waiting on afk status. tps_booster: %s" % globals_file.tps_booster
+      globals_file.log_information(log_message)
     else:
       globals_file.tps_booster['waiting_on_player_status']['players'] = None
       globals_file.tps_booster['waiting_on_player_status']['is_waiting'] = False
       globals_file.tps_booster['waiting_on_player_status']['time_started'] = None
+      log_message = "Not players afk. tps_booster: %s" % globals_file.tps_booster
+      globals_file.log_information(log_message)
       return 0
     for player in players:
       globals_file.tps_booster['waiting_on_player_status']['players'][player] = {}
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['waiting'] = True
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['start_time'] = datetime.datetime.now()
       globals_file.tps_booster['waiting_on_player_status']['players'][player]['is_afk'] = False
+      log_message = "Started waiting on player specific afk status. tps_booster: %s" % globals_file.tps_booster
+      globals_file.log_information(log_message)
       time.sleep(1)
       await globals_file.console_logs_channel.send(u'afkplus player %s' % player.replace('\\', ''))

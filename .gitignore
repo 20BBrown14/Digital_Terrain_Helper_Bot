@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#Unique
+# Unique
 config.py
+DigitalTerrainHelpBotLogs.log
