@@ -41,7 +41,7 @@ def init(client, config):
       for channel in guild.channels:
         log_information("channel:%s, id:%d" % (channel, channel.id))
         if channel.id == config.logs['logs_channel']:
-          logs = config.logs
+          logs = dict(config.logs)
           logs['logs_channel'] = channel
   else:
     logs = None
@@ -58,7 +58,7 @@ def init(client, config):
     for guild in client.guilds:
       for channel in guild.channels:
         if channel.id == config.moderation['moderation_channel']:
-          moderation = config.moderation
+          moderation = dict(config.moderation)
           moderation['moderation_channel'] = channel
   else:
     moderation = None
@@ -75,7 +75,7 @@ def init(client, config):
     for guild in client.guilds:
       for channel in guild.channels:
         if channel.id == config.bot_commands['commands_channel']:
-          commands_config = config.bot_commands
+          commands_config = dict(config.bot_commands)
           commands_config['commands_channel'] = channel
   else:
     commands_config = None
@@ -133,7 +133,7 @@ What do you do in your free time or for work (just want to know a little about y
   global tps_booster
   tps_booster = None
   if(config.tps_booster):
-    tps_booster = config.tps_booster
+    tps_booster = dict(config.)
     tps_booster['waiting_on_player_list'] = None
     tps_booster['waiting_on_player_status'] = None
   else:

@@ -13,7 +13,7 @@ from rules import set_playerlist, handle_afk_status
 # Last time bot's code was updated
 # Printed out by !version
 # eg. 2019-03-31_1 is the first change on March 31, 2019
-current_version = '2020-06-02_3'
+current_version = '2020-06-03_1'
 
 client = Client()
 
