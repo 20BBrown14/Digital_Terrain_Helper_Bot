@@ -13,6 +13,8 @@ ex: !ping
 
 async def command(message):
   await delete_message(message)
+  if(not is_command_allowed(message, TRIGGER)):
+    return 0
   await send_message(message, globals_file.welcome_message, True)
 
 

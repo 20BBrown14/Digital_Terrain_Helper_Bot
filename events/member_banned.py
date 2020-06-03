@@ -9,7 +9,7 @@ Handle member being banned
 @param user: The user who was banned
 @result: Sends moderation messages and messages to console_log
 """
-async def handle(guild, User):
+async def handle(guild, user):
   if(globals_file.moderation and globals_file.console_logs_channel):
     if(isinstance(user, User)):
       await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.name)

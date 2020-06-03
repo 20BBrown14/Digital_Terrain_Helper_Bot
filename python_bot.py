@@ -6,14 +6,14 @@ import logging
 # local imports
 import config
 import globals_file
-from commands import version, status, ping, join_message_test
+from commands import version, status, ping, join_message_test, help
 from events import member_joined, member_left, member_banned, guild_channel_updated
 from rules import set_playerlist, handle_afk_status
 
 # Last time bot's code was updated
 # Printed out by !version
 # eg. 2019-03-31_1 is the first change on March 31, 2019
-current_version = '2020-06-03_1'
+current_version = '2020-06-03_2'
 
 client = Client()
 
@@ -101,6 +101,9 @@ async def on_message(message):
 
     elif(join_message_test.is_triggered(command_body)):
       await join_message_test.command(message)
+
+    elif(help.is_triggered(command_body)):
+      await help.command(message)
 
 
 client.run(config.bot_token)

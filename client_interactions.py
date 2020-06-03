@@ -29,6 +29,7 @@ def determine_destination(message, force_author):
   return message.channel if message.channel.name and not force_author else message.author
 
 def is_command_allowed(message, trigger):
+  min_role = None
   if(globals_file.permissions and globals_file.permissions[trigger]):
     if(globals_file.permissions[trigger] == 0):
       return True
