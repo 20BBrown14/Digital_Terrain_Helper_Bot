@@ -27,12 +27,19 @@ def log_information(log_message):
 
 def init(client, config):
 
+  log_information("Starting config setup")
+
   # Setup logs
+  log_message = "Raw logs config: %s" % config.logs
+  log_information(log_message)
   global logs
   logs = None
+  log_information("Temporarily logging all guilds and channels as this setup loops")
   if(config.logs and config.logs['log_all_messages']):
     for guild in client.guilds:
+      log_information("guild:%s, id:%d" % (guild, guild.id))
       for channel in guild.channels:
+        log_information("channel:%s, id:%d" % (channel, channel.id))
         if channel.id == config.logs['logs_channel']:
           logs = config.logs
           logs['logs_channel'] = channel
@@ -42,7 +49,9 @@ def init(client, config):
   log_message = "Logs config setup: %s" % logs
   log_information(log_message)
 
-  # Setup mooderation
+  # Setup moderation
+  log_message = "Raw moderation config: %s" % config.moderation
+  log_information(log_message)
   global moderation
   moderation = None
   if(config.moderation and config.moderation['moderation_channel']):
@@ -58,6 +67,8 @@ def init(client, config):
   log_information(log_message)
 
   # Setup bot commands
+  log_message = "Raw commands config: %s" % config.bot_commands
+  log_information(log_message)
   global commands_config
   commands_config = None
   if(config.bot_commands and config.bot_commands['commands_channel']):
@@ -72,6 +83,8 @@ def init(client, config):
   log_message = "Commands config setup: %s" % commands_config
   log_information(log_message)
 
+  log_message = "Raw console_logs config: %s" % config.console_channel
+  log_information(log_message)
   global console_logs_channel
   console_logs_channel = None
   if(config.console_channel):
@@ -83,6 +96,9 @@ def init(client, config):
   log_message = "Console Logs Config setup: %s" % console_logs_channel
   log_information(log_message)
 
+
+  log_message = "Raw permissions config: %s" % config.permissions
+  log_information(log_message)
   global permissions
   permissions = None
   permissions = config.permissions if config.permissions else None
@@ -111,6 +127,9 @@ What do you do in your free time or for work (just want to know a little about y
   %s
   """ % app_template
 
+
+  log_message = "Raw tps_booster config: %s" % config.tps_booster
+  log_information(log_message)
   global tps_booster
   tps_booster = None
   if(config.tps_booster):
@@ -122,3 +141,4 @@ What do you do in your free time or for work (just want to know a little about y
 
   log_message = "TPS booster config setup: %s" % tps_booster
   log_information(log_message)
+  log_information("Config setup complete")
