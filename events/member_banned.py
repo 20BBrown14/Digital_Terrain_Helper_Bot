@@ -1,5 +1,5 @@
 #member_banned.py
-
+from discord import User, Member
 import globals_file
 
 """

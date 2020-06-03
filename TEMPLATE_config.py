@@ -43,6 +43,7 @@ permissions = json.loads("""
   "version": "MINIMUM_ROLE_ID"
   "status": "MINIMUM_ROLE_ID"
   "ping": "MINIMUM_ROLE_ID"
-  "joinmessagetest": "MINIMUM_ROLE_ID"
+  "joinmessagetest": "MINIMUM_ROLE_ID",
+  "help": "MINIMUM_ROLE_ID"
 }
 """.replace('\n', ' '))
