@@ -23,7 +23,8 @@ logging.basicConfig(filename="DigitalTerrainHelperBotLogs.log", level=logging.IN
 logger = logging.getLogger('Digital_Terrain_Helper_Bot')
 
 def log_information(log_message):
-  logger.info("%s - %s" % (time.strftime("%d/%m/%Y %H:%M:%S"), log_message))
+  return false
+  # logger.info("%s - %s" % (time.strftime("%d/%m/%Y %H:%M:%S"), log_message))
 
 def init(client, config):
 
