@@ -25,7 +25,7 @@ def kill_bot():
 
 def start_bot():
   global python_bot_pid
-  subProcess = subprocess.Popen(["python3", "python_bot.py"], cwd=os.getcwd())
+  subProcess = subprocess.Popen(["python3.5m", "python_bot.py"], cwd=os.getcwd())
   time.sleep(5)
   python_bot_pid = subProcess.pid
   print("Python bot id: " + str(python_bot_pid))
@@ -47,7 +47,7 @@ def updateMCStats():
   mcstats_config = config.mcstats_config
   print(mcstats_config)
   minecraftStatsRemoteUpdate.getMinecraftStatsFilesWithFTP(mcstats_config['projectDirectory'], mcstats_config['serverPath'], mcstats_config['worldName'], mcstats_config['ftpHost'], mcstats_config['ftpUser'], mcstats_config['ftpPassword'])
-  os.system('python3 %s %s' % (mcstats_update_file_Location, mcstats_update_config_location))
+  os.system('python3.5m %s %s' % (mcstats_update_file_Location, mcstats_update_config_location))
   minecraftStatsRemoteUpdate.uploadMinecraftStatsFilesWithFTP(mcstats_config['ftpHost'], mcstats_config['ftpUser'], mcstats_config['ftpPassword'])
 
 
@@ -58,7 +58,6 @@ def main():
   start_time = datetime.datetime.now()
   while(1):
     mcstats_config = config.mcstats_config
-    # check_for_git_update()
     if(config.mcstats_config['isActive']):
       updateMCStats()
     time.sleep(60*240)
