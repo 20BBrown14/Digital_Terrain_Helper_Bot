@@ -40,10 +40,22 @@ console_channel = 0
 # if invalid ids are given assumes there is permission to use command
 permissions = json.loads("""
 {
-  "version": "MINIMUM_ROLE_ID"
-  "status": "MINIMUM_ROLE_ID"
-  "ping": "MINIMUM_ROLE_ID"
+  "version": "MINIMUM_ROLE_ID",
+  "status": "MINIMUM_ROLE_ID",
+  "ping": "MINIMUM_ROLE_ID",
   "joinmessagetest": "MINIMUM_ROLE_ID",
-  "help": "MINIMUM_ROLE_ID"
+  "help": "MINIMUM_ROLE_ID",
+  "updateWebStats": "MINIMUM_ROLE_ID"
+}
+""".replace('\n', ' '))
+
+mcstats_config = json.loads("""
+{
+  "projectDirectory": "",
+  "serverPath": "",
+  "worldName": "",
+  "ftpHost": "",
+  "ftpUser": "",
+  "ftpPassword": ""
 }
 """.replace('\n', ' '))

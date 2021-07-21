@@ -131,3 +131,7 @@ dmypy.json
 # Unique
 config.py
 DigitalTerrainHelpBotLogs.log
+/temp_mc_world_files
+mcstats_config.json
+/temp
+/data
