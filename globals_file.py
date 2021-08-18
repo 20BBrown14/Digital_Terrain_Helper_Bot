@@ -125,7 +125,7 @@ We'll be sure to give you roles and whitelist you as soon as we notice you've jo
 or @megabytes role in the #default channel to get our attention. If you make your Discord nickname match your IGN _exactly_ it'll make things go faster for you.
 Direct any questions you might have to a Gigabyte or Megabyte and we'll make sure to help you as much as possible.
 Note: If you've joined the Discord without sending an app first be sure to post your app in the #default channel using the template below.
-Webite: <https://www.digitalterrainmc.com/>
+Website: <https://www.digitalterrainmc.com/>
 Dynmap: <http://digitalterrain.mcpro.io:4492/index.html>
 Stats: <http://digitalterrain.mcpro.io:4492/mcstats/index.html>
 Proximity Chat Info: <https://discord.com/channels/682047180072419359/689644468441579540/870822313250156564>
