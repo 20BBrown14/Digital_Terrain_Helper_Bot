@@ -119,12 +119,16 @@ What do you do in your free time or for work (just want to know a little about y
 
   global welcome_message
   welcome_message = """
-  Welcome to the Digital Terrain Minecraft server Discord! We're happy to have you here!
-  Be sure to checkout the information doc that's pinned in both the #landing and #information channel.
-  We'll be sure to give you roles and whitelist you as soon as we notice you've joined the Discord. You can mention the gigabytes
-  or megabytes role in the #default to get our attention. If you make your Discord nickname match your IGN it'll make things go faster for you.
-  Direct any questions you might have to a Gigabyte or Megabyte and we'll make sure to help you as much as possible.
-  Note: If you've joined the Discord without sending an app first be sure to post your app in the #default channel using the template below.
+Welcome to the Digital Terrain Minecraft server Discord! We're happy to have you here!
+Be sure to checkout the website linked below where you can find all our rules and the server IP as well as a link to our dynmap and stats page.
+We'll be sure to give you roles and whitelist you as soon as we notice you've joined the Discord. You can mention the @gigabytes
+or @megabytes role in the #default channel to get our attention. If you make your Discord nickname match your IGN _exactly_ it'll make things go faster for you.
+Direct any questions you might have to a Gigabyte or Megabyte and we'll make sure to help you as much as possible.
+Note: If you've joined the Discord without sending an app first be sure to post your app in the #default channel using the template below.
+Webite: <https://www.digitalterrainmc.com/>
+Dynmap: <http://digitalterrain.mcpro.io:4492/index.html>
+Stats: <http://digitalterrain.mcpro.io:4492/mcstats/index.html>
+Proximity Chat Info: <https://discord.com/channels/682047180072419359/689644468441579540/870822313250156564>
   %s
   """ % app_template
 

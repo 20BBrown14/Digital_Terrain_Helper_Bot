@@ -1,5 +1,6 @@
 # Library imports
 from discord import Client, Game, User, Member
+import discord
 import time
 import logging
 
@@ -15,10 +16,12 @@ from rules import set_playerlist, handle_afk_status
 # eg. 2019-03-31_1 is the first change on March 31, 2019
 current_version = '2021-06-21_1'
 
-client = Client()
+intents = intents = discord.Intents.all()
+client = Client(intents=intents)
 
 @client.event
 async def on_member_join(member):
+  print(member)
   log_message = "Member Joined\nMember: name:%s, nick:%s, id:%d" % (member.name, member.nick, member.id)
   globals_file.log_information(log_message)
   await member_joined.handle(member)

@@ -12,6 +12,8 @@ async def handle(member):
   if(globals_file.moderation and globals_file.console_logs_channel):
     if(member.nick):
       await globals_file.moderation['moderation_channel'].send('Removing "%s" from whitelist. You should double check that it was actually completed.' % member.nick)
+      await globals_file.console_logs_channel.send("kick %s You have left the Discord server" % member.nick)
       await globals_file.console_logs_channel.send('whitelist remove %s' % member.nick)
     await globals_file.moderation['moderation_channel'].send('Removing "%s" from whitelist. You should double check that it was actually completed.' % member.name)
+    await globals_file.console_logs_channel.send("kick %s You have left the Discord server" % member.name)
     await globals_file.console_logs_channel.send('whitelist remove %s' % member.name)

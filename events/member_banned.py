@@ -13,10 +13,13 @@ async def handle(guild, user):
   if(globals_file.moderation and globals_file.console_logs_channel):
     if(isinstance(user, User)):
       await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.name)
+      await globals_file.console_logs_channel.send("kick %s You are being banned" % user.name)
       await globals_file.console_logs_channel.send("ban %s Banned from Discord server" % user.name)
     elif(isinstance(user, Member)):
       if(user.nick):
         await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.nick)
+        await globals_file.console_logs_channel.send("kick %s You are being banned" % user.nick)
         await globals_file.console_logs_channel.send("ban %s Banned from Discord Server" % user.nick)
       await globals_file.moderation['moderation_channel'].send('Adding "%s" to the blacklist due to being banned from the Discord server. You should double check this was actually completed.' % user.name)
+      await globals_file.console_logs_channel.send("kick %s You are being banned" % user.name)
       await globals_file.console_logs_channel.send("ban %s Banned from Discord Server" % user.name)
