@@ -41,6 +41,7 @@ def uploadMinecraftStatsFilesWithFTP(ftpHost, ftpUser, ftpPass):
             os.system('find %s -maxdepth 1 -type f -exec curl --ftp-create-dirs -T {} ftp://%s:%s@%s/plugins/dynmap/web/mcstats/data/playerlist/ \;' % (dirpath, ftpUser, ftpPass, ftpHost))
         if(dirpath.endswith('/rankings')):
             os.system('find %s -maxdepth 1 -type f -exec curl --ftp-create-dirs -T {} ftp://%s:%s@%s/plugins/dynmap/web/mcstats/data/rankings/ \;' % (dirpath, ftpUser, ftpPass, ftpHost))
-    
+        if(dirpath.endswith('/events')):
+            os.system('find %s -maxdepth 1 -type f -exec curl --ftp-create-dirs -T {} ftp://%s:%s@%s/plugins/dynmap/web/mcstats/data/rankings/ \;' % (dirpath, ftpUser, ftpPass, ftpHost))
     os.system('find data/ -maxdepth 1 -type f -exec curl --ftp-create-dirs -T {} ftp://%s:%s@%s/plugins/dynmap/web/mcstats/data/ \;' % (ftpUser, ftpPass, ftpHost))
     print('Finished Minecraft Stats file upload')
