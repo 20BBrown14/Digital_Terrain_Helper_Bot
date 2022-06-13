@@ -27,7 +27,7 @@ async def command(message):
 
   print(mcstats_config)
   minecraftStatsRemoteUpdate.getMinecraftStatsFilesWithFTP(mcstats_config['projectDirectory'], mcstats_config['serverPath'], mcstats_config['worldName'], mcstats_config['ftpHost'], mcstats_config['ftpUser'], mcstats_config['ftpPassword'])
-  os.system('python3.5m %s %s' % (mcstats_update_file_Location, mcstats_update_config_location))
+  os.system('python3 %s %s' % (mcstats_update_file_Location, mcstats_update_config_location))
   minecraftStatsRemoteUpdate.uploadMinecraftStatsFilesWithFTP(mcstats_config['ftpHost'], mcstats_config['ftpUser'], mcstats_config['ftpPassword'])
   
   await send_message(message, "Finished updated web stats!")
